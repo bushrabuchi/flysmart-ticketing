@@ -92,6 +92,7 @@ export function SearchForm({ onSubmit, defaultValues }) {
             label={<span className="field-label">Depart</span>}
             value={form.departDate}
             onChange={(date) => update('departDate', date)}
+            testId="search-depart"
           />
         </div>
         {form.tripType === 'roundtrip' && (
