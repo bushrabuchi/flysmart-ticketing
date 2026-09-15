@@ -1,0 +1,155 @@
+// Header.scss
+// Fonts: add these once in your index.html <head>, or keep the @import below
+// if your build pipeline (Vite/Webpack) inlines it fine for you.
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Space+Grotesk:wght@400;500;600&display=swap');
+
+.site-header {
+  --navy: #0b2b3c;
+  --gold: #c89b3c;
+  --gold-ink: #14202b;
+  --line-on-navy: rgba(255, 255, 255, 0.22);
+
+  background: var(--navy);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  color: #fff;
+
+  &__inner {
+    max-width: 100%;
+    margin: 0 left;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  // Perforated ticket-stub divider between logo and nav
+  &__stub {
+    width: 1px;
+    height: 30px;
+    flex: 0 0 auto;
+    background-image: radial-gradient(circle, var(--line-on-navy) 1.4px, transparent 1.4px);
+    background-size: 1px 9px;
+    background-repeat: repeat-y;
+
+    @media (max-width: 720px) {
+      display: none;
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    /* Don't give this a small fixed width */
+    width: auto;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .header-actions__icon:hover {
+    background: #f4f7fb;
+    color: #0b63ce;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  margin-right: auto;
+
+  &__mark {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--navy);
+    transform: rotate(-45deg);
+    flex: 0 0 auto;
+  }
+
+  &__wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  &__name {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #fff;
+  }
+
+  &__tag {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 1px;
+  }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  button {
+    font-family: inherit;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.85);
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+
+    &:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 560px) {
+      span {
+        display: none;
+      }
+    }
+  }
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+
+    &:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  // Accessible focus states
+  button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header * {
+    transition: none !important;
+  }
+}

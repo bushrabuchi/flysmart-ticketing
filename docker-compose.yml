@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: almosafer
+      POSTGRES_PASSWORD: almosafer
+      POSTGRES_DB: almosafer
+    ports:
+      - "5432:5432"
+    volumes:
+      - almosafer_pg:/var/lib/postgresql/data
+
+volumes:
+  almosafer_pg:
