@@ -8,7 +8,17 @@ flysmart/
 └── backend/               Node.js, Express, REST API, PostgreSQL (with in-memory fallback)
 ```
 
-## Run
+## Run with Docker
+
+From the repository root, build and start the API, frontend, and PostgreSQL services:
+
+```bash
+docker compose up --build
+```
+
+Open http://localhost:5173. Stop the services with `docker compose down`; add `-v` when you also want to remove the PostgreSQL data volume.
+
+## Run locally
 
 **1. API**
 

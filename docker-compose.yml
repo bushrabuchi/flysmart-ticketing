@@ -2,13 +2,38 @@ services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: almosafer
-      POSTGRES_PASSWORD: almosafer
-      POSTGRES_DB: almosafer
+      POSTGRES_USER: flysmart
+      POSTGRES_PASSWORD: flysmart
+      POSTGRES_DB: flysmart
     ports:
       - "5432:5432"
     volumes:
-      - almosafer_pg:/var/lib/postgresql/data
+      - flysmart_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flysmart -d flysmart"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      DATABASE_URL: postgres://flysmart:flysmart@postgres:5432/flysmart
+      PORT: 4000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    expose:
+      - "4000"
+
+  frontend:
+    build:
+      context: ./flysmart-ticketing
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
 
 volumes:
-  almosafer_pg:
+  flysmart_pg:
