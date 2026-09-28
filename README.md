@@ -7,7 +7,8 @@ flysmart/
 ├── flysmart-ticketing/   React 19, Vite, JavaScript, Router, SCSS, ESLint, Playwright
 └── backend/               Node.js, Express, REST API, PostgreSQL (with in-memory fallback)
 ```
-
+## Vercel link 
+  https://travel-website-ai-ml-git-main-bushracc891-2262s-projects.vercel.app/
 ## Run with Docker
 
 From the repository root, build and start the API, frontend, and PostgreSQL services:
