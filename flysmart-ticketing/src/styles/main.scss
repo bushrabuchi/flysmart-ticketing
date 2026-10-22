@@ -1,4 +1,4 @@
-$ink: #f6fcff;
+$ink: #172b36;
 $muted: #667780;
 $line: #e3e9e8;
 $paper: #ffffff;
@@ -355,7 +355,7 @@ input[type="checkbox"] {
   min-height: 100vh;
   min-height: 100svh;
   align-items: center;
-  overflow: hidden;
+  overflow: visible;
   padding: 100px 24px 44px;
   background:
   // Fade the bottom into the page background
@@ -521,7 +521,7 @@ input[type="checkbox"] {
 
     h2 {
       margin: 0;
-      color: $ink;
+      color: #ffffff;
       font-size: clamp(30px, 4vw, 44px);
       font-weight: 750;
       letter-spacing: -0.045em;

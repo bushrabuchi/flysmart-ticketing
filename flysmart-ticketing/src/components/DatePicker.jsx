@@ -72,6 +72,7 @@ function isSameDay(a, b) {
 
 export function DatePicker({ label, value, onChange, minDate, testId }) {
   const [open, setOpen] = useState(false);
+  const [openAbove, setOpenAbove] = useState(false);
   const selectedDate = useMemo(() => parseISODate(value), [value]);
   const minDateObj = useMemo(
     () =>
@@ -106,15 +107,21 @@ export function DatePicker({ label, value, onChange, minDate, testId }) {
   }
 
   function toggleOpen() {
-    setOpen((current) => {
-      const next = !current;
-      if (next) setViewDate(selectedDate ?? minDateObj);
-      return next;
-    });
+    const next = !open;
+    if (next) {
+      setViewDate(selectedDate ?? minDateObj);
+      const trigger = rootRef.current?.querySelector(".date-picker__trigger");
+      const triggerRect = trigger?.getBoundingClientRect();
+      if (triggerRect) {
+        const spaceBelow = window.innerHeight - triggerRect.bottom;
+        setOpenAbove(spaceBelow < 290 && triggerRect.top > spaceBelow);
+      }
+    }
+    setOpen(next);
   }
 
   return (
-    <div className="date-picker" ref={rootRef}>
+    <div className={`date-picker${open ? " is-open" : ""}`} ref={rootRef}>
       {label ? <span className="date-picker__label">{label}</span> : null}
 
       <button
@@ -132,7 +139,11 @@ export function DatePicker({ label, value, onChange, minDate, testId }) {
       </button>
 
       {open ? (
-        <div className="date-picker__panel" role="dialog" aria-label={label}>
+        <div
+          className={`date-picker__panel${openAbove ? " is-above" : ""}`}
+          role="dialog"
+          aria-label={label}
+        >
           <div className="date-picker__header">
             <button
               type="button"

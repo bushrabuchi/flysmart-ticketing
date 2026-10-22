@@ -4,6 +4,10 @@
   flex-direction: column;
   gap: 4px;
 
+  &.is-open {
+    z-index: 10;
+  }
+
   &__label {
     display: flex;
     flex-direction: column;
@@ -52,13 +56,18 @@
     position: absolute;
     top: calc(100% + 6px);
     left: 0;
-    width: 280px;
+    width: min(280px, calc(100vw - 32px));
     background: #fff;
     border: 1px solid var(--sf-line, #dfe3e8);
     border-radius: 12px;
     box-shadow: var(--sf-shadow-popover, 0 12px 28px rgba(20, 30, 45, 0.12));
     padding: 14px;
     z-index: 20;
+
+    &.is-above {
+      top: auto;
+      bottom: calc(100% + 6px);
+    }
   }
 
   &__header {
@@ -85,6 +94,14 @@
 
       &:hover {
         background: #f2f5f9;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .date-picker__panel {
+        right: 8px;
+        left: auto;
+        width: min(280px, calc(100vw - 48px));
       }
     }
   }
