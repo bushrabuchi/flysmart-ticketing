@@ -1,7 +1,12 @@
+import { SlidersHorizontal } from 'lucide-react'
+
 export function FilterBar({ stops, sort, onStopsChange, onSortChange }) {
   return (
     <aside className="card filter-bar">
-      <strong>Filters</strong>
+      <strong className="filter-bar__heading">
+        <SlidersHorizontal size={17} aria-hidden="true" />
+        Refine your search
+      </strong>
       <label>
         Stops
         <select

@@ -13,8 +13,13 @@ export function Stepper({ current }) {
       {STEPS.map((step, index) => {
         const state = index < currentIndex ? 'done' : index === currentIndex ? 'active' : ''
         return (
-          <div key={step.path} className={`step ${state}`}>
-             {step.label}
+          <div
+            key={step.path}
+            className={`step ${state}`}
+            data-step={index + 1}
+            aria-current={index === currentIndex ? 'step' : undefined}
+          >
+            {step.label}
           </div>
         )
       })}

@@ -1,8 +1,7 @@
 import { useState } from 'react'
+import { ArrowRight, Search } from 'lucide-react'
 import { AIRPORTS } from '../types/flight'
 import { DatePicker } from './DatePicker'
-import '../styles/searchForm.scss'
-
 
 export function SearchForm({ onSubmit, defaultValues }) {
   const [form, setForm] = useState({
@@ -45,7 +44,11 @@ export function SearchForm({ onSubmit, defaultValues }) {
   }
 
   return (
-    <form className="card" onSubmit={handleSubmit}>
+    <form className="card search-card" onSubmit={handleSubmit}>
+      <div className="search-card__heading">
+        <h2>Where would you like to go?</h2>
+        <p>Choose your route and travel dates to compare available flights.</p>
+      </div>
       {error ? <div className="error-banner">{error}</div> : null}
       <div className="form-grid">
         <label>
@@ -119,7 +122,9 @@ export function SearchForm({ onSubmit, defaultValues }) {
       </div>
       <div className="actions">
         <button data-testid="search-submit" className="btn btn-primary" type="submit">
+          <Search size={17} aria-hidden="true" />
           Search flights
+          <ArrowRight size={16} aria-hidden="true" />
         </button>
       </div>
     </form>

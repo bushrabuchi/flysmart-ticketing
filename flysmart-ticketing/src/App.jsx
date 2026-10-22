@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { BookingProvider } from './context/BookingContext'
 import { ConfirmationPage } from './pages/ConfirmationPage'
 import { PaymentPage } from './pages/PaymentPage'
@@ -8,10 +8,17 @@ import { TravellersPage } from './pages/TravellersPage'
 import { Header } from './components/Header'
 
 function Layout({ children }) {
+  const { pathname } = useLocation()
+  const isLandingPage = pathname === '/'
+
   return (
-    <div className="app-shell">
+    <div className={`app-shell${isLandingPage ? ' app-shell--landing' : ''}`}>
       <Header />
-      {children}
+      <main className="main-content">{children}</main>
+      <footer className="site-footer">
+        <strong>Fly Smart</strong>
+        <span>Thoughtful journeys start here. Demo booking experience.</span>
+      </footer>
     </div>
   )
 }

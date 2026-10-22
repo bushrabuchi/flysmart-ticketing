@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { LockKeyhole } from 'lucide-react'
 import { Stepper } from '../components/Stepper'
 import { TicketSummary } from '../components/TicketSummary'
 import { useBooking } from '../context/BookingContext'
@@ -28,10 +29,15 @@ export function PaymentPage() {
   return (
     <>
       <Stepper current="/payment" />
-      <h1 className="page-title">Review and pay</h1>
-      <p className="page-copy">Demo payment only — no card numbers are collected or charged.</p>
+      <div className="page-heading">
+        <div>
+          <p className="page-heading__eyebrow">Final step</p>
+          <h1 className="page-title">Review and pay</h1>
+          <p className="page-copy">Demo payment only — no card numbers are collected or charged.</p>
+        </div>
+      </div>
       <TicketSummary search={search} flight={selectedFlight} traveller={traveller} />
-      <form className="card" style={{ marginTop: '1rem' }} onSubmit={handlePay}>
+      <form className="card flow-form" style={{ marginTop: '1rem' }} onSubmit={handlePay}>
         {formError ? <div className="error-banner">{formError}</div> : null}
         {error ? <div className="info-banner">{error}</div> : null}
         <label>
@@ -46,7 +52,7 @@ export function PaymentPage() {
             <option value="applepay">Apple Pay</option>
           </select>
         </label>
-        <label style={{ marginTop: '1rem', flexDirection: 'row', alignItems: 'center' }}>
+        <label className="terms-label" style={{ marginTop: '1rem', flexDirection: 'row', alignItems: 'center' }}>
           <input
             data-testid="agree-terms"
             type="checkbox"
@@ -55,6 +61,10 @@ export function PaymentPage() {
           />
           I agree this is a demo booking and not a real ticket.
         </label>
+        <div className="info-banner" style={{ marginTop: '1rem', marginBottom: 0 }}>
+          <LockKeyhole size={16} aria-hidden="true" />
+          This checkout is for demonstration only. No payment details are requested.
+        </div>
         <div className="actions">
           <button className="btn btn-ghost" type="button" onClick={() => navigate('/travellers')}>
             Back

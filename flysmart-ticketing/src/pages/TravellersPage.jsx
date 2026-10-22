@@ -59,13 +59,18 @@ export function TravellersPage() {
   return (
     <>
       <Stepper current="/travellers" />
-      <h1 className="page-title">Traveller information</h1>
-      <p className="page-copy">
-        Passenger details as they appear on the passport.
-      </p>
+      <div className="page-heading">
+        <div>
+          <p className="page-heading__eyebrow">Almost there</p>
+          <h1 className="page-title">Traveller information</h1>
+          <p className="page-copy">
+            Enter passenger details exactly as they appear on the passport.
+          </p>
+        </div>
+      </div>
       <TicketSummary search={search} flight={selectedFlight} />
       <form
-        className="card"
+        className="card flow-form"
         style={{ marginTop: "1rem" }}
         onSubmit={handleSubmit}
       >
@@ -81,6 +86,7 @@ export function TravellersPage() {
             First name
             <input
               data-testid="traveller-first-name"
+              autoComplete="given-name"
               value={form.firstName}
               onChange={(event) => update("firstName", event.target.value)}
             />
@@ -89,6 +95,7 @@ export function TravellersPage() {
             Last name
             <input
               data-testid="traveller-last-name"
+              autoComplete="family-name"
               value={form.lastName}
               onChange={(event) => update("lastName", event.target.value)}
             />
@@ -97,6 +104,7 @@ export function TravellersPage() {
             Passport
             <input
               data-testid="traveller-passport"
+              autoComplete="off"
               value={form.passport}
               onChange={(event) => update("passport", event.target.value)}
             />
@@ -106,6 +114,7 @@ export function TravellersPage() {
             <input
               data-testid="traveller-email"
               type="email"
+              autoComplete="email"
               value={form.email}
               onChange={(event) => update("email", event.target.value)}
             />
@@ -114,6 +123,8 @@ export function TravellersPage() {
             Phone
             <input
               data-testid="traveller-phone"
+              type="tel"
+              autoComplete="tel"
               value={form.phone}
               onChange={(event) => update("phone", event.target.value)}
             />

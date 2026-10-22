@@ -35,14 +35,17 @@ export function ResultsPage() {
   return (
     <>
       <Stepper current="/flights" />
-      <h1 className="page-title">
-        {search.from} → {search.to}
-      </h1>
-      <p className="page-copy">
-        {search.departDate} · {search.adults} adult{search.adults > 1 ? 's' : ''}
-      </p>
+      <div className="page-heading">
+        <div>
+          <p className="page-heading__eyebrow">Your next journey</p>
+          <h1 className="page-title">{search.from} <span aria-hidden="true">→</span> {search.to}</h1>
+          <p className="page-copy">
+            {search.departDate} · {search.adults} traveler{search.adults > 1 ? 's' : ''}
+          </p>
+        </div>
+      </div>
       {error ? <div className="info-banner">{error}</div> : null}
-      {loading ? <div className="card">Loading flights…</div> : null}
+      {loading ? <div className="card empty" role="status">Finding the best flights for you…</div> : null}
       <div className="results-layout">
         <FilterBar
           stops={stops}
@@ -50,7 +53,12 @@ export function ResultsPage() {
           onStopsChange={setStops}
           onSortChange={setSort}
         />
-        <div>
+        <div className="results-list">
+          {!loading && visible.length > 0 ? (
+            <p className="results-count">
+              {visible.length} flight option{visible.length === 1 ? '' : 's'} · sorted by {sort}
+            </p>
+          ) : null}
           {visible.length === 0 && !loading ? (
             <div className="card empty" data-testid="empty-flights">
               No flights found — try another date or route.

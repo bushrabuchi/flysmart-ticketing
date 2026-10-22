@@ -3,19 +3,19 @@ export function TicketSummary({ search, flight, traveller, bookingId, paymentMet
 
   return (
     <section className="ticket" data-testid="ticket-summary">
-      <h3>{bookingId ? `E-ticket ${bookingId}` : 'Trip summary'}</h3>
+      <h3>{bookingId ? `E-ticket · ${bookingId}` : 'Your trip at a glance'}</h3>
       <dl>
-        <dt>Route</dt>
+        <dt>Flight route</dt>
         <dd>
           {search.from} → {search.to}
         </dd>
-        <dt>Date</dt>
+        <dt>Departure</dt>
         <dd>{search.departDate}</dd>
-        <dt>Flight</dt>
+        <dt>Airline & flight</dt>
         <dd>
           {flight.airline} · {flight.id}
         </dd>
-        <dt>Times</dt>
+        <dt>Schedule</dt>
         <dd>
           {flight.departTime} – {flight.arriveTime} ({flight.duration})
         </dd>
@@ -31,12 +31,12 @@ export function TicketSummary({ search, flight, traveller, bookingId, paymentMet
         ) : null}
         {paymentMethod ? (
           <>
-            <dt>Payment</dt>
+            <dt>Payment method</dt>
             <dd>{paymentMethod}</dd>
           </>
         ) : null}
-        <dt>Total</dt>
-        <dd>SAR {flight.priceSar * (search.adults || 1)}</dd>
+        <dt>Total · {search.adults || 1} traveler{(search.adults || 1) > 1 ? 's' : ''}</dt>
+        <dd>SAR {(flight.priceSar * (search.adults || 1)).toLocaleString()}</dd>
       </dl>
     </section>
   )
